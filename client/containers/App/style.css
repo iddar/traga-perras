@@ -1,0 +1,15 @@
+.content {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen {
+  display: flex;
+  border-radius: 5px;
+  padding: .5rem;
+  background: rgb(243,226,199);
+  background: linear-gradient(to bottom,  rgba(243,226,199,1) 0%,rgba(193,158,103,1) 50%,rgba(182,141,76,1) 51%,rgba(233,212,179,1) 100%);
+}

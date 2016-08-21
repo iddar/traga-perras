@@ -1,0 +1,14 @@
+.imageBox {
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  margin: .2rem;
+  background: #000;
+}
+
+.imageBox img{
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  /*filter: blur(10px) grayscale(20%);*/
+}
