@@ -1,5 +1,5 @@
 .imageBox {
-  height: 250px;
+  height: 574px;
   width: 250px;
   overflow: hidden;
   margin: .3rem;
@@ -7,8 +7,7 @@
 }
 
 .imageBox img{
-  height: 250px;
   width: 250px;
-  object-fit: cover;
+  height: 574px;
   /*filter: blur(10px) grayscale(20%);*/
 }

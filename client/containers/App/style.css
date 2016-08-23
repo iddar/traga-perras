@@ -1,5 +1,4 @@
 body {
-  background: url('http://www.triplaymaya.com.mx/wp-content/uploads/2013/10/marupa.jpg');
 }
 
 .content {
@@ -12,12 +11,12 @@ body {
 }
 
 .screen {
-  border: solid 5px #944823;
+  border: solid 5px rgb(149,149,149);
   display: flex;
   border-radius: 5px;
   padding: .5rem;
-  background: rgb(243,226,199);
-  background: linear-gradient(to bottom,  rgba(243,226,199,1) 0%,rgba(193,158,103,1) 50%,rgba(182,141,76,1) 51%,rgba(233,212,179,1) 100%);
+  background: rgb(149,149,149);
+  background: linear-gradient(to bottom,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%);
 }
 
 .result {

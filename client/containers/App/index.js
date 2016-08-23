@@ -9,28 +9,28 @@ import Roll from '../../components/Roll'
 import * as TodoActions from '../../actions/todos'
 import style from './style.css'
 
-const catalog = [
-  {
-    img: 'https://pbs.twimg.com/profile_images/603255697002790912/dSoMJigf.jpg',
-    text: 'uno'
-  },
-  {
-    img: 'https://pbs.twimg.com/profile_images/676801385405538304/M8hgumGw.jpg',
-    text: 'dos'
-  },
-  {
-    img: 'http://ichef.bbci.co.uk/news/624/cpsprodpb/4232/production/_90464961_55d-394fda8f2225.jpg',
-    text: 'tres'
-  }
-]
+const socket = require('socket.io-client')('http://localhost:8000')
+const catalog = require('../../constants/options')
 
 class App extends Component {
 
   constructor (props, context) {
     super(props, context)
+
+    let newGame = this.newGame.bind(this)
+
+    socket.on('coin', () => {
+      if (this.state.finish || this.state.first) {
+        console.warn('coin')
+        newGame(this)
+        this.setState({first: false})
+      }
+    })
+
     this.results = [null, null, null]
     this.state = {
       game: 0,
+      first: true,
       finish: false,
       win: false
     }
@@ -41,14 +41,18 @@ class App extends Component {
     if (!this.results.some(e => e === null)) {
       let isWin = this.results.every(e => this.results[0] === e)
 
-      this.setState({
+      const data = {
         finish: true,
         win: isWin
-      })
+      }
+
+      this.setState(data)
+      socket.emit('finish', {...data, results: this.results, win: isWin})
     }
   }
 
   newGame () {
+    console.warn('new....');
     this.results = [null, null, null]
     var game
 
@@ -63,10 +67,8 @@ class App extends Component {
   }
 
   getText () {
-    let text = _.reduce(this.results, (sum, item) => {
-      if (sum === '') return catalog[item].text
-      return `${sum} ${catalog[item].text}`
-    }, '')
+    let results = this.results
+    let text = `${catalog.caras[results[0]].text} ${catalog.cuerpo[results[1]].text} ${catalog.patas[results[2]].text}`
 
     return _.capitalize(text)
   }
@@ -77,14 +79,14 @@ class App extends Component {
     return (
       <div className={style.content} key={game}>
         <div className={style.screen}>
-          <Roll onFinish={this.onFinish.bind(this, 0)} catalog={catalog} />
-          <Roll onFinish={this.onFinish.bind(this, 1)} catalog={catalog} />
-          <Roll onFinish={this.onFinish.bind(this, 2)} catalog={catalog} />
+          <Roll onFinish={this.onFinish.bind(this, 0)} catalog={catalog.caras} />
+          <Roll onFinish={this.onFinish.bind(this, 1)} catalog={catalog.cuerpo} />
+          <Roll onFinish={this.onFinish.bind(this, 2)} catalog={catalog.patas} />
         </div>
 
-        <div className={style.result}>{finish && this.getText()}</div>
+        {/* <div className={style.result}>{finish && this.getText()}</div>
 
-        <a onClick={finish ? this.newGame.bind(this) : null}>New game</a>
+        <a onClick={finish ? this.newGame.bind(this) : null}>New game</a> */}
       </div>
     )
   }

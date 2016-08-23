@@ -35,7 +35,7 @@ class MainSection extends Component {
     position = position >= 100 ? 0 : position
     this.setState({
       position: position + 1,
-      item: _.random(0, 2)
+      item: _.random(0, 3)
     })
   }
 
@@ -43,12 +43,6 @@ class MainSection extends Component {
     clearInterval(this.aniamtion)
     clearInterval(this.timer)
   }
-
-  // renderImages () {
-  //   return _.map([1, 2, 3], (position) => {
-  //     return <img key={position} src={`http://lorempixel.com/250/250/cats/?q=${position}`} />
-  //   })
-  // }
 
   render () {
     let { position, item } = this.state
